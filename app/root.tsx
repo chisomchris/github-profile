@@ -39,7 +39,6 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
   const q = url.searchParams.get("q") || "";
   if (!q) return { users: emptyResponse, q };
   const users: Response = await searchUser<Response>(q);
-  return { users: emptyResponse, q };
   return { users, q };
 };
 

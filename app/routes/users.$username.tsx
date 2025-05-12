@@ -6,37 +6,37 @@ import { GithubStat } from "~/components/GithubStat";
 import { getUser } from "~/fetchers/user";
 import { BaseUser, Repo } from "~/types";
 
-// export const meta: MetaFunction<typeof loader> = ({ data }) => {
-//   return [
-//     {
-//       title: `${data && data.user ? data.user?.name + " |" : ""}  Github Profile`,
-//     },
-//     { name: "description", content: "GitHub Profile" },
-//   ];
-// };
+export const meta: MetaFunction<typeof loader> = ({ data }) => {
+  return [
+    {
+      title: `${data && data.user ? data.user?.name + " |" : ""}  Github Profile`,
+    },
+    { name: "description", content: "GitHub Profile" },
+  ];
+};
 
-// export const loader = async ({ params }: LoaderFunctionArgs) => {
-//   const { username } = params;
-//   if (!username) return {} as { user: BaseUser };
-//   const user = await getUser<BaseUser>(username);
-//   return { user };
-// };
+export const loader = async ({ params }: LoaderFunctionArgs) => {
+  const { username } = params;
+  if (!username) return {} as { user: BaseUser };
+  const user = await getUser<BaseUser>(username);
+  return { user };
+};
 
 export default function User() {
-  // const { user } = useLoaderData<typeof loader>();
+  const { user } = useLoaderData<typeof loader>();
   // console.log(user);
   return (
     <>
       <div className="flex gap-4 flex-wrap flex-col -mt-[2.5rem] sm:items-end sm:flex-row">
-        {/* <Avatar src={user.avatar_url} alt={user.name} />
+        <Avatar src={user.avatar_url} alt={user.name} />
         <GithubStat desc="Followers" value={user.followers} />
         <GithubStat desc="Following" value={user.following} />
-        <GithubStat desc="Location" value={user.location} /> */}
+        <GithubStat desc="Location" value={user.location} />
 
-        <Avatar src={"/hero-image-github-profile.jpg"} alt="" />
+        {/* <Avatar src={"/hero-image-github-profile.jpg"} alt="" />
         <GithubStat desc="Followers" value={34} />
         <GithubStat desc="Following" value={2} />
-        <GithubStat desc="Location" value={"Tokyo, Japan"} />
+        <GithubStat desc="Location" value={"Tokyo, Japan"} /> */}
       </div>
 
       <div>
