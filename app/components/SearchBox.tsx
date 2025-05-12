@@ -1,4 +1,4 @@
-import { Form, useLoaderData, useSubmit } from "@remix-run/react";
+import { Form, useLoaderData, useLocation, useSubmit } from "@remix-run/react";
 
 const debounce = (fn: Function, delay = 500) => {
   let timer: any = null;
@@ -13,6 +13,7 @@ const debounce = (fn: Function, delay = 500) => {
 export const SearchBox = () => {
   const { q }: { q: string } = useLoaderData();
   const submit = useSubmit();
+  const location = useLocation();
 
   const search = debounce((form: HTMLFormElement) => {
     submit(form);
@@ -26,6 +27,7 @@ export const SearchBox = () => {
         onChange={(evt) => {
           search(evt.currentTarget);
         }}
+        action={location.pathname}
       >
         <label htmlFor="search" className="sr-only">
           Search for Github user via username

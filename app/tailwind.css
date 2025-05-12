@@ -16,3 +16,7 @@ body {
   padding: 0;
   box-sizing: border-box;
 }
+
+.card-background {
+  background: linear-gradient(95deg, #111729 3%, #1d1b48 99.61%)
+}
