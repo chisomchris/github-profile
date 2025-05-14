@@ -2,23 +2,12 @@ export type BaseUser = {
   login: string;
   id: number;
   name: string;
-  node_id: string;
-  avatar_url: string;
-  gravatar_id?: string;
-  url: string;
   html_url: string;
+  avatar_url: string;
   location: string;
   followers: number;
   following: number;
-  gists_url: string;
-  starred_url: string;
-  subscriptions_url: string;
-  organizations_url: string;
-  repos_url: string;
-  events_url: string;
-  received_events_url: string;
-  type: string;
-  site_admin: boolean;
+  bio: string;
 };
 
 export type Response = {
@@ -28,10 +17,13 @@ export type Response = {
 };
 
 export type Repo = {
+  html_url: string;
   name: string;
   description: string;
-  license: string;
-  likes: number;
+  license: null | {
+    spdx_id: string;
+  };
+  stargazers_count: number;
   forks: number;
   updated_at: string;
 };

@@ -12,7 +12,7 @@ import type { LinksFunction, LoaderFunctionArgs } from "@remix-run/node";
 import "./tailwind.css";
 import { SearchBox } from "./components/SearchBox";
 import { UserList } from "./components/UserList";
-import { searchUser } from "./fetchers/user";
+import { searchUser } from "./utils/user";
 import { Response } from "./types";
 
 export const links: LinksFunction = () => [

@@ -1,26 +1,28 @@
-import { Form, useLoaderData, useLocation, useSubmit } from "@remix-run/react";
-
-const debounce = (fn: Function, delay = 500) => {
-  let timer: any = null;
-  return (...args: any) => {
-    clearTimeout(timer);
-    timer = setTimeout(() => {
-      fn(...args);
-    }, delay);
-  };
-};
+import {
+  Form,
+  useLoaderData,
+  useLocation,
+  useSearchParams,
+  useSubmit,
+} from "@remix-run/react";
+import { debounce } from "~/utils/lib";
 
 export const SearchBox = () => {
   const { q }: { q: string } = useLoaderData();
   const submit = useSubmit();
   const location = useLocation();
+  const [, setSearchParams] = useSearchParams();
 
   const search = debounce((form: HTMLFormElement) => {
-    submit(form);
+    if (form.querySelector("input")?.value) {
+      submit(form);
+    } else {
+      setSearchParams({});
+    }
   }, 1000);
 
   return (
-    <div className="peer w-[85%] mx-auto max-w-sm absolute top-[calc(1.75rem+2vw)] left-1/2 -translate-x-1/2">
+    <div className="peer text-white w-[85%] mx-auto max-w-sm absolute top-[calc(1.75rem+2vw)] left-1/2 -translate-x-1/2">
       <Form
         role="search"
         className="relative w-full"
