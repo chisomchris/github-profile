@@ -21,9 +21,11 @@ export const _ = (date1: Date, date2: Date) => {
     return `${hours} hours ago`;
   }
   if (days >= 365) {
-    return `${Math.floor(days / 365)} years ago`;
+    const yr = Math.floor(days / 365);
+    return yr > 1 ? `${yr} years ago` : "1 year ago";
   }
   if (days >= 30) {
-    return `${Math.floor(days / 30)} months ago`;
+    const mn = Math.floor(days / 30);
+    return mn > 1 ? `${mn} months ago` : "1 month ago";
   }
 };

@@ -1,12 +1,12 @@
 import { LoaderFunctionArgs } from "@remix-run/node";
 import { Link, MetaFunction, useLoaderData } from "@remix-run/react";
-import React from "react";
 import { Avatar } from "~/components/Avatar";
 import { GithubStat } from "~/components/GithubStat";
 import { RepoCard } from "~/components/RepoCard";
 import { getUser, getUserRepos } from "~/utils/user";
 import { BaseUser, Repo } from "~/types";
 import invariant from "tiny-invariant";
+import { useState } from "react";
 
 export const meta: MetaFunction<typeof loader> = ({ data }) => {
   return [
@@ -26,26 +26,33 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
 };
 
 export default function User() {
+  const [showLess, setShowLess] = useState(false);
   const { user, repos } = useLoaderData<typeof loader>();
   return (
     <>
-      <div className="flex gap-4 flex-wrap flex-col -mt-[2.5rem] sm:items-end sm:flex-row">
-        <Avatar src={user.avatar_url} alt={user.name || user.login} />
-        <div className="flex gap-4 flex-wrap">
-          <GithubStat desc="Followers" value={user.followers} />
-          <GithubStat desc="Following" value={user.following} />
-          {user && user.location ? (
-            <GithubStat desc="Location" value={user.location} />
-          ) : null}
+      {user ? (
+        <div className="flex gap-4 flex-wrap flex-col -mt-[2.5rem] sm:items-end sm:flex-row">
+          <Avatar src={user.avatar_url} alt={user.name || user.login} />
+          <div className="flex gap-4 flex-wrap">
+            <GithubStat desc="Followers" value={user.followers} />
+            <GithubStat desc="Following" value={user.following} />
+            {user && user.location ? (
+              <GithubStat desc="Location" value={user.location} />
+            ) : null}
+          </div>
         </div>
-      </div>
+      ) : (
+        "Loading..."
+      )}
 
-      <div>
-        <h1 className="text-white text-[2rem] font-bold mt-4">
-          <Link to={user.html_url}>{user.name || user.login}</Link>
-        </h1>
-        {!!user.bio && <p className="text-[#97A3B6] text-lg">{user.bio}</p>}
-      </div>
+      {user ? (
+        <div>
+          <h1 className="text-white text-[2rem] font-bold mt-4">
+            <Link to={user.html_url}>{user.name || user.login}</Link>
+          </h1>
+          {!!user.bio && <p className="text-[#97A3B6] text-lg">{user.bio}</p>}
+        </div>
+      ) : null}
 
       <section id="repos" className="py-6">
         <ul className="grid gap-4 md:grid-cols-2">

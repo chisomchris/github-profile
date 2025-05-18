@@ -5,7 +5,7 @@ import { _ } from "~/utils/lib";
 export const RepoCard = ({ repo }: { repo: Repo }) => {
   return (
     <li className="card-background rounded-xl p-4">
-      <Link to={repo.html_url} className="text-white text-lg font-bold">
+      <Link to={repo.html_url} className="text-white text-lg">
         <h2 className="text-[1.25rem] text-[#CDD5E0] font-bold pb-4">
           {repo.name}
         </h2>
@@ -32,7 +32,8 @@ export const RepoCard = ({ repo }: { repo: Repo }) => {
             {repo.stargazers_count}
           </p>
           <p className="text-[0.75rem]">
-            {_(new Date(repo.updated_at), new Date())}
+            {" "}
+            updated {_(new Date(repo.updated_at), new Date())}
           </p>
         </div>
       </Link>

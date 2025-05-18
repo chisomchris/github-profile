@@ -20,3 +20,13 @@ body {
 .card-background {
   background: linear-gradient(95deg, #111729 3%, #1d1b48 99.61%)
 }
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
