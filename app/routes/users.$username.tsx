@@ -6,7 +6,7 @@ import { RepoCard } from "~/components/RepoCard";
 import { getUser, getUserRepos } from "~/utils/user";
 import { BaseUser, Repo } from "~/types";
 import invariant from "tiny-invariant";
-import { useState } from "react";
+import { Fragment, useState } from "react";
 
 export const meta: MetaFunction<typeof loader> = ({ data }) => {
   return [
@@ -59,9 +59,9 @@ export default function User() {
           {repos && repos.length > 0
             ? repos.map((repo) => {
                 return (
-                  <React.Fragment key={repo.name}>
+                  <Fragment key={repo.name}>
                     <RepoCard repo={repo} />
-                  </React.Fragment>
+                  </Fragment>
                 );
               })
             : null}
